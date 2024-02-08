@@ -1,18 +1,31 @@
 {
   "name": "squadmakers-vue-library",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.0.1",
   "type": "module",
+  "files": ["dist"],
+  "main": "./dist/squadmakers-vue-library.umd.cjs",
+  "module": "./dist/squadmakers-vue-library.js",
+  "exports": {
+    ".": {
+      "import": "./dist/squadmakers-vue-library.js",
+      "require": "./dist/squadmakers-vue-library.umd.cjs"
+    }
+  },
+
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "watch": "vite build --watch",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "vue": "^3.4.15"
   },
   "devDependencies": {
+    "@types/node": "^20.11.16",
     "@vitejs/plugin-vue": "^5.0.3",
+    "path": "^0.12.7",
     "typescript": "^5.2.2",
     "vite": "^5.1.0",
     "vue-tsc": "^1.8.27"
