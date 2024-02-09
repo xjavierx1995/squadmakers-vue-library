@@ -75,7 +75,7 @@ const imageUrl = computed(() => {
   .meta {
     position: relative;
     z-index: 0;
-    /* height: 200px; */
+    height: 200px;
   }
   .photo {
     position: absolute;
@@ -94,35 +94,30 @@ const imageUrl = computed(() => {
     position: relative;
     z-index: 1;
 
+    font-family: Montserrat;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: left;
+    letter-spacing: 0em;
+
     .info-title {
-      font-family: Montserrat;
-      font-size: 10px;
-      font-weight: 400;
-      line-height: 12px;
-      letter-spacing: 0em;
-      text-align: left;
+      font-size: .8em;
       color: #828282;
     }
 
     .info-description-name {
-      font-family: Montserrat;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 15px;
-      letter-spacing: 0em;
-      text-align: left;
+      font-size: 1.2em;
       color: #000000;
       margin-bottom: 10px;
     }
     .info-description {
-      font-family: Montserrat;
       font-size: 12px;
-      font-weight: 400;
-      line-height: 15px;
-      letter-spacing: 0em;
-      text-align: left;
       color: #000000;
       margin-bottom: 10px;
+
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 130px;
     }
   }
 }
@@ -132,20 +127,14 @@ const imageUrl = computed(() => {
   .blog-card {
     flex-direction: row;
     max-width: 700px;
-    max-height: 140px;
+    /* max-height: 140px; */
   }
   .blog-card .meta {
     flex-basis: 50%;
-    /* height: auto; */
+    height: auto;
   }
   .blog-card .description {
     flex-basis: 60%;
-  }
-  .blog-card.alt {
-    flex-direction: row-reverse;
-  }
-  .blog-card.alt .details {
-    padding-left: 25px;
   }
 }
 </style>
