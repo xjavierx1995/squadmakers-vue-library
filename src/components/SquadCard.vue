@@ -2,21 +2,13 @@
   <div class="blog-card">
     <div class="meta">
       <div class="photo" :style="'background-image: url('+imageUrl+')'"></div>
-      <!-- <ul class="details">
-        <li class="author"><a href="#"> {{ imageUrl }} </a></li>
-        <li class="date">Nov. 13, 2020</li>
-        <li class="tags">
-          <ul>
-            <li><a href="#">C++</a></li>
-            <li><a href="#">Python</a></li>
-            <li><a href="#">Java</a></li>
-            <li><a href="#">JavaScript</a></li>
-          </ul>
-        </li>
-      </ul> -->
     </div>
     <div class="description">
-      <div class="info-title">{{ character.status }} - {{ character.species }}</div>
+      <div class="info-title">
+        <img v-if="isAlive" src="../assets/status_green.svg" alt="is alive">
+        <img v-else src="../assets/status_red.svg" alt="is dead">
+        {{ character.status }} - {{ character.species }}
+      </div>
       <div class="info-description-name">{{ character.name }}</div>
       <div class="info-title">Last known location:</div>
       <div class="info-description">{{ character.location.name }}</div>
@@ -54,6 +46,10 @@ const props = defineProps<{ character: Character }>()
 
 const imageUrl = computed(() => {
   return props.character.image; 
+})
+
+const isAlive = computed(() => {
+  return props.character.status === 'Alive'; 
 })
 </script>
 <style scoped>
@@ -103,6 +99,10 @@ const imageUrl = computed(() => {
     .info-title {
       font-size: .8em;
       color: #828282;
+
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .info-description-name {
