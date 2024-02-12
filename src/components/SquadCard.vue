@@ -1,7 +1,12 @@
 <template>
   <div class="blog-card">
     <div class="meta">
-      <div class="photo" :style="'background-image: url('+imageUrl+')'"></div>
+      <div class="photo" :style="'background-image: url(' + imageUrl + ')'"></div>
+
+      <div class="favorite-button" @click="$emit('manageFavorite', character, favorite)">
+        <img v-if="favorite" src="../assets/star_on.svg" alt="favorite">
+        <img v-else src="../assets/star_off.svg" alt="favorite">
+      </div>
     </div>
     <div class="description">
       <div class="info-title">
@@ -9,12 +14,12 @@
         <img v-else src="../assets/status_red.svg" alt="is dead">
         {{ character.status }} - {{ character.species }}
       </div>
-      <div class="info-description-name">{{ character.name }}</div>
+      <div class="info-description-name" @click="$emit('showProfile', character)">{{ character.name }}</div>
       <div class="info-title">Last known location:</div>
       <div class="info-description">{{ character.location.name }}</div>
       <div class="info-title">First seen in:</div>
       <div class="info-description">{{ character.origin.name }}</div>
-      
+
     </div>
   </div>
 </template>
@@ -42,18 +47,22 @@ interface Character {
   };
 }
 
-const props = defineProps<{ character: Character }>()
+const props = defineProps<{ 
+  character: Character,
+  favorite: boolean
+}>()
 
 const imageUrl = computed(() => {
-  return props.character.image; 
+  return props.character.image;
 })
 
 const isAlive = computed(() => {
-  return props.character.status === 'Alive'; 
+  return props.character.status === 'Alive';
 })
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
 .blog-card {
   display: flex;
   flex-direction: column;
@@ -72,17 +81,40 @@ const isAlive = computed(() => {
     position: relative;
     z-index: 0;
     height: 200px;
+
+    .photo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.2s;
+
+    }
+    .favorite-button {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background: #E0E0E0;
+      padding: 10px;
+      display: flex;
+      border-radius: 25px;
+      margin: 10px;
+
+      &:hover {
+        cursor: pointer;
+        background: #e8e8e8;
+      }
+
+      img {
+        width: 3vh;
+        /* height: 18px; */
+      }
+    }
   }
-  .photo {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.2s;
-  }
+
 
   .description {
     padding: 1rem;
@@ -109,7 +141,13 @@ const isAlive = computed(() => {
       font-size: 1.2em;
       color: #000000;
       margin-bottom: 10px;
+
+      &:hover {
+        cursor: pointer;
+        color: #f2994a;
+      }
     }
+
     .info-description {
       font-size: 12px;
       color: #000000;
@@ -129,12 +167,13 @@ const isAlive = computed(() => {
     max-width: 700px;
     /* max-height: 140px; */
   }
+
   .blog-card .meta {
     flex-basis: 50%;
     height: auto;
   }
+
   .blog-card .description {
     flex-basis: 60%;
   }
-}
-</style>
+}</style>
