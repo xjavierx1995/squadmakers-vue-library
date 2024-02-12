@@ -1,9 +1,11 @@
 {
   "name": "squadmakers-vue-library",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/squadmakers-vue-library.umd.cjs",
   "module": "./dist/squadmakers-vue-library.js",
   "exports": {
@@ -12,7 +14,6 @@
       "require": "./dist/squadmakers-vue-library.umd.cjs"
     }
   },
-
   "scripts": {
     "dev": "vite",
     "watch": "vite build --watch",
